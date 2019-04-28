@@ -1,0 +1,6 @@
+0:computer, vision, pattern, recognition
+1:Machine, Learning
+2:Artificial, Intelligence
+3:Computation, and Language
+4:Machine, Learning
+5:Neural, Evolutionary, Computing

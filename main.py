@@ -68,7 +68,7 @@ if __name__ == "__main__":
     
     ### Basic settings ###
     # dataset selection: AG's News (default) and Yelp Review
-    parser.add_argument('--dataset', default='agnews', choices=['agnews', 'yelp'])
+    parser.add_argument('--dataset', default='agnews', choices=['agnews', 'yelp', 'github_readmes'])
     # neural model selection: Convolutional Neural Network (default) and Hierarchical Attention Network
     parser.add_argument('--model', default='cnn', choices=['cnn', 'rnn'])
     # weak supervision selection: label surface names (default), class-related keywords and labeled documents
@@ -101,6 +101,7 @@ if __name__ == "__main__":
     parser.add_argument('--trained_weights', default=None)
 
     args = parser.parse_args()
+    print("Yahoo")
     print(args)
 
     alpha = args.alpha
@@ -119,6 +120,12 @@ if __name__ == "__main__":
             max_sequence_length = 100
 
         elif args.dataset == 'yelp':
+            update_interval = 50
+            pretrain_epochs = 30
+            self_lr = 1e-4
+            max_sequence_length = 500
+       
+        elif args.dataset == 'github_readmes':
             update_interval = 50
             pretrain_epochs = 30
             self_lr = 1e-4
@@ -190,9 +197,9 @@ if __name__ == "__main__":
 
     if args.trained_weights is None:
         print("\n### Phase 1: vMF distribution fitting & pseudo document generation ###")
-        
+        print("Word Sup List: ", word_sup_list)
         word_sup_array = np.array([np.array([vocabulary[word] for word in word_class_list]) for word_class_list in word_sup_list])
-        
+        print("Word Sup Array: ", word_sup_array)
         total_counts = sum(word_counts[ele] for ele in word_counts)
         total_counts -= word_counts[vocabulary_inv_list[0]]
         background_array = np.zeros(vocab_sz)

@@ -24,6 +24,9 @@ def read_file(data_dir, with_evaluation):
             elif data_dir == './yelp':
                 data.append(row[1])
                 target.append(int(row[0]) - 1)
+            elif data_dir == './github_readmes':
+                data.append(row[2])
+                target.append(int(row[0]))
     if with_evaluation:
         y = np.asarray(target)
         assert len(data) == len(y)

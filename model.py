@@ -238,7 +238,7 @@ class WSTC(object):
 
                 y_pred = q.argmax(axis=1)
                 p = self.target_distribution(q, power)
-                print('\nIter {}: '.format(ite), end='')
+                print('\nIter {}: '.format(ite), end=" ")
                 if y is not None:
                     f1_macro, f1_micro = np.round(f1(y, y_pred), 5)
                     logdict = dict(iter=ite, f1_macro=f1_macro, f1_micro=f1_micro)
